@@ -1,0 +1,38 @@
+// Optional Prisma schema for later migration to a real DB (Postgres/SQLite)
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Course {
+  id        String   @id @default(cuid())
+  title     String
+  description String?
+  units     String   // JSON text of units/lessons for prototype
+  createdAt DateTime @default(now())
+}
+
+model Flashcard {
+  id         String   @id @default(cuid())
+  question   String
+  answer     String
+  interval   Int
+  repetitions Int
+  ease       Float
+  nextReview DateTime
+  metadata   String?  // JSON
+}
+
+model Essay {
+  id        String   @id @default(cuid())
+  title     String
+  text      String
+  score     Int
+  letter    String
+  feedback  String   // JSON
+  createdAt DateTime @default(now())
+}
